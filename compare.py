@@ -27,7 +27,7 @@ if __name__ == '__main__':
                 pointer=0
                 Lastbuffer += readresult
                 while pointer < windowsize:
-                    print('当前窗口是',Lastbuffer[pointer:pointer+windowsize],',指针在小数点后',global_pointer-1,'位', end='\r')
+                    print('当前窗口是',Lastbuffer[pointer:pointer+windowsize],', 指针在小数点后',global_pointer-1,'位', end='\r')
                     if Lastbuffer[pointer:pointer+windowsize] in uids:
                         print('第%d个命中的uid是%d' % (count, int(readresult[pointer:pointer+windowsize])))
                         count+=1
@@ -36,9 +36,9 @@ if __name__ == '__main__':
             pointer=0
             Lastbuffer=''
             while pointer < epochsize-windowsize:
-                print('当前窗口是',readresult[pointer:pointer+windowsize],',指针在小数点后',global_pointer-1,'位', end='\r')
+                print('当前窗口是',readresult[pointer:pointer+windowsize],', 指针在小数点后',global_pointer-1,'位', end='\r')
                 if readresult[pointer:pointer+windowsize] in uids:
-                    print('第%d个命中的uid是%d\t\t\t\t\t\t\t' % (count, int(readresult[pointer:pointer+windowsize])))
+                    print('第%d个命中的uid是%d' % (count, int(readresult[pointer:pointer+windowsize])), ', 指针在小数点后',global_pointer-1,'位')
                     count+=1
                 pointer += 1
                 global_pointer+=1
