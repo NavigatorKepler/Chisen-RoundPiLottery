@@ -114,3 +114,4 @@ dmypy.json
 .pyre/
 *.exe
 *.txt
+*.json

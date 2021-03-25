@@ -194,7 +194,10 @@ if __name__ == '__main__':
     # for i in preprocessed:
     #     print(i.items())
     print('当前有效转发数:', len(preprocessed), file=file)
-    
+
+    with open('reposts_raw.json', 'w+', encoding='UTF-8') as rrfile:
+        json.dump(reposts, rrfile, ensure_ascii=False, indent=2)
+
     # poseprocessed中的内容已经进行了md5计算并取尾数
     postprocessed = postprocess(preprocessed)
     p2=[]
