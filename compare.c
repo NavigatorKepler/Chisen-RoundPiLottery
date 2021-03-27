@@ -63,10 +63,10 @@ int main() {
                 memset(Window,0,WINDOWSIZE+1);
                 memcpy(Window, &FileBuffer_T[epoch_pointer], WINDOWSIZE);
                 sscanf(Window, "%d", &__tempuid);
-                printf("Current: %09d, Pointer: %d  |\t\r", __tempuid, global_pointer);
+                printf("Current: %09d, Pointer: %d              \r", __tempuid, global_pointer);
                 for (int i=0;i<__uidcount;i++){
                     if (uidarray[i] == __tempuid) {
-                        printf("Hit %d: %d, Pointer:%d  |\t\n", global_counter, __tempuid, global_pointer-1);
+                        printf("Hit %d: %d, Pointer:%d              \n", global_counter, __tempuid, global_pointer-1);
                         global_counter++;
                         break;
                     }
@@ -81,10 +81,10 @@ int main() {
             memset(Window,0,WINDOWSIZE+1);
             memcpy(Window, &FileBuffer_T[epoch_pointer], WINDOWSIZE);
             sscanf(Window, "%d", &__tempuid);
-            printf("Current: %09d, Pointer: %d  |\t\r", __tempuid, global_pointer);
+            printf("Current: %09d, Pointer: %d              \r", __tempuid, global_pointer);
             for (int i=0;i<__uidcount;i++){
                 if (uidarray[i] == __tempuid) {
-                    printf("Hit %d: %d, Pointer:%d  |\t\n", global_counter, __tempuid, global_pointer-1);
+                    printf("Hit %d: %d, Pointer:%d              \n", global_counter, __tempuid, global_pointer-1);
                     global_counter++;
                     break;
                 }
