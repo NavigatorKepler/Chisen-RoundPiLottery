@@ -14,9 +14,9 @@ const char* PiPath="Pi - Dec - Chudnovsky.txt";
 const char* RepostPath="reposts.txt";
 const char* LogPath="log.txt";
 
-uint64_t global_pointer=0;
+size_t global_pointer=0;
 uint64_t global_counter=0;
-uint32_t  epoch_pointer=0;
+size_t  epoch_pointer=0;
 uint64_t*        uidarray;
 uint64_t        __tempuid;
 uint64_t     __uidcount=0;
