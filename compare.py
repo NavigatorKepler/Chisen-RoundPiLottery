@@ -21,7 +21,7 @@ if __name__ == '__main__':
     while 1:
         readresult = pifile.read(epochsize)
         if readresult == '':
-            print('没有找到有效的uid!')
+            print('读取结束!')
         else:
             if Lastbuffer != '':
                 pointer=0
