@@ -29,6 +29,7 @@ char FileBuffer_T[READSIZE+WINDOWSIZE+1];
 char Window[WINDOWSIZE+1];
 
 int main() {
+
     FILE* fp_pi = fopen(PiPath, "r");
     if (fp_pi == NULL) {
         printf("Cannot find %s.", PiPath);
@@ -49,15 +50,19 @@ int main() {
 
     uidarray=(uint64_t*)malloc(sizeof(uint64_t)*(UIDWIDTH+1));
     while (fgets(FileBuffer_T, UIDLENGTH, fp_uid) != NULL) {
-        sscanf(FileBuffer_T, "%d", &__tempuid);
+        sscanf(FileBuffer_T, "%ld", &__tempuid);
+        fprintf(fp_log, "Load UID - %ld\n", __tempuid);
         uidarray[__uidcount]=__tempuid;
         __uidcount++;
     }
 
-    printf("Load UID: %d\n", __uidcount);
-    printf("WindowSize: %d\n", WINDOWSIZE);
-    printf("READSIZE: %d\n", READSIZE);
-    printf("PROGRESSGAP: %d\n\n", PROGRESSGAP);
+    fprintf(fp_log, "Total UID: %ld\n", __uidcount);
+    printf("Total UID: %ld\n", __uidcount);
+    printf("WindowSize: %ld\n", WINDOWSIZE);
+    printf("READSIZE: %ld\n", READSIZE);
+    printf("PROGRESSGAP: %ld\n\n", PROGRESSGAP);
+
+    fflush(fp_log);
 
     while (1) {
         __readstat = fread(&FileBuffer_T[WINDOWSIZE], sizeof(char), READSIZE, fp_pi);
@@ -75,15 +80,15 @@ int main() {
             while (epoch_pointer < WINDOWSIZE) {
                 memset(Window,0,WINDOWSIZE+1);
                 memcpy(Window, &FileBuffer_T[epoch_pointer], WINDOWSIZE);
-                sscanf(Window, "%d", &__tempuid);
+                sscanf(Window, "%ld", &__tempuid);
                 if (global_pointer % PROGRESSGAP == 0) {
-                    printf("Read: %d, Current: %09d, Pointer: %d              \r", __readcount, __tempuid, global_pointer);
+                    printf("Read: %ld, Current: %09ld, Pointer: %ld              \r", __readcount, __tempuid, global_pointer);
                 }
                 for (int i=0;i<__uidcount;i++){
                     if (uidarray[i] == __tempuid) {
-                        fprintf(fp_log, "Hit %d: %9d, Pointer: %d\n", global_counter, __tempuid, global_pointer-1);
+                        fprintf(fp_log, "Hit %ld: %9ld, Pointer: %ld\n", global_counter, __tempuid, global_pointer-1);
                         fflush(fp_log);
-                        printf("Hit %d: %9d, Pointer: %d              \n", global_counter, __tempuid, global_pointer-1);
+                        printf("Hit %ld: %9ld, Pointer: %ld              \n", global_counter, __tempuid, global_pointer-1);
                         global_counter++;
                         break;
                     }
@@ -101,15 +106,15 @@ int main() {
         while (epoch_pointer < READSIZE) {
             memset(Window,0,WINDOWSIZE+1);
             memcpy(Window, &FileBuffer_T[epoch_pointer], WINDOWSIZE);
-            sscanf(Window, "%d", &__tempuid);
+            sscanf(Window, "%ld", &__tempuid);
             if (global_pointer % PROGRESSGAP == 0) {
-                printf("Read: %d, Current: %09d, Pointer: %d              \r", __readcount, __tempuid, global_pointer);
+                printf("Read: %ld, Current: %09ld, Pointer: %ld              \r", __readcount, __tempuid, global_pointer);
             }
             for (int i=0;i<__uidcount;i++){
                 if (uidarray[i] == __tempuid) {
-                    fprintf(fp_log, "Hit %d: %9d, Pointer: %d\n", global_counter, __tempuid, global_pointer-1);
+                    fprintf(fp_log, "Hit %ld: %9ld, Pointer: %ld\n", global_counter, __tempuid, global_pointer-1);
                     fflush(fp_log);
-                    printf("Hit %d: %9d, Pointer: %d              \n", global_counter, __tempuid, global_pointer-1);
+                    printf("Hit %ld: %9ld, Pointer: %ld              \n", global_counter, __tempuid, global_pointer-1);
                     global_counter++;
                     break;
                 }
