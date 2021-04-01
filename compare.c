@@ -128,7 +128,6 @@ int main() {
         }
     }
 
-
     printf("Process Finished.      \n");
     fclose(fp_log);
     fclose(fp_pi);
